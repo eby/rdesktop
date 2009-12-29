@@ -1201,8 +1201,8 @@ disk_query_directory(RD_NTHANDLE handle, uint32 info_class, char *pattern, STREA
 			out_uint32_le(out, filestat.st_size);	/* filesize low */
 			out_uint32_le(out, 0);	/* filesize high */
 			out_uint32_le(out, file_attributes);
-			out_uint8(out, 2 * strlen(pdirent->d_name) + 2);	/* unicode length */
-			out_uint8s(out, 7);	/* pad? */
+			out_uint16(out, 2 * strlen(pdirent->d_name) + 2);	/* unicode length */
+			out_uint8s(out, 6);	/* pad? */
 			out_uint8(out, 0);	/* 8.3 file length */
 			out_uint8s(out, 2 * 12);	/* 8.3 unicode length */
 			rdp_out_unistr(out, pdirent->d_name, 2 * strlen(pdirent->d_name));
